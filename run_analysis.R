@@ -275,12 +275,12 @@ for (i in 1 : 6) {
 #####            descriptive variable names.
 ## -- Define the regular-expression and replace Feature Name One by One --
 subsetFeatures$FeatureName<-sub("^t", "Time_Of_", subsetFeatures$FeatureName,)
-subsetFeatures$FeatureName<-sub("Freq()", "", subsetFeatures$FeatureName,)
 subsetFeatures$FeatureName<-sub("^f", "Freq_Of_", subsetFeatures$FeatureName,)
 subsetFeatures$FeatureName<-sub("Acc", "Accelerometer_", subsetFeatures$FeatureName,)
 subsetFeatures$FeatureName<-sub("Gyro", "Gyroscope_", subsetFeatures$FeatureName,)
 subsetFeatures$FeatureName<-sub("-mean\\(\\)", "(mean)", subsetFeatures$FeatureName,)
 subsetFeatures$FeatureName<-sub("-std\\(\\)", "(standard deviation)", subsetFeatures$FeatureName,)
+subsetFeatures$FeatureName<-sub("-meanFreq\\(\\)", "(weighted average)", subsetFeatures$FeatureName,)
 subsetFeatures$FeatureName<-sub("Jerk", "Jerk_", subsetFeatures$FeatureName,)
 subsetFeatures$FeatureName<-sub("Mag", "Magnitude_", subsetFeatures$FeatureName,)
 subsetFeatures$FeatureName<-sub("BodyBody", "Body", subsetFeatures$FeatureName,)
@@ -349,39 +349,39 @@ names(subData)
 ### [46] "Freq_Of_Body_Accelerometer_(standard deviation)(Axis-X)"       
 ### [47] "Freq_Of_Body_Accelerometer_(standard deviation)(Axis-Y)"       
 ### [48] "Freq_Of_Body_Accelerometer_(standard deviation)(Axis-Z)"       
-### [49] "Freq_Of_Body_Accelerometer_(mean)(Axis-X)"                     
-### [50] "Freq_Of_Body_Accelerometer_(mean)(Axis-Y)"                     
-### [51] "Freq_Of_Body_Accelerometer_(mean)(Axis-Z)"                     
+### [49] "Freq_Of_Body_Accelerometer_(weighted average)(Axis-X)"         
+### [50] "Freq_Of_Body_Accelerometer_(weighted average)(Axis-Y)"         
+### [51] "Freq_Of_Body_Accelerometer_(weighted average)(Axis-Z)"         
 ### [52] "Freq_Of_Body_Accelerometer_Jerk_(mean)(Axis-X)"                
 ### [53] "Freq_Of_Body_Accelerometer_Jerk_(mean)(Axis-Y)"                
 ### [54] "Freq_Of_Body_Accelerometer_Jerk_(mean)(Axis-Z)"                
 ### [55] "Freq_Of_Body_Accelerometer_Jerk_(standard deviation)(Axis-X)"  
 ### [56] "Freq_Of_Body_Accelerometer_Jerk_(standard deviation)(Axis-Y)"  
 ### [57] "Freq_Of_Body_Accelerometer_Jerk_(standard deviation)(Axis-Z)"  
-### [58] "Freq_Of_Body_Accelerometer_Jerk_(mean)(Axis-X)"                
-### [59] "Freq_Of_Body_Accelerometer_Jerk_(mean)(Axis-Y)"                
-### [60] "Freq_Of_Body_Accelerometer_Jerk_(mean)(Axis-Z)"                
+### [58] "Freq_Of_Body_Accelerometer_Jerk_(weighted average)(Axis-X)"    
+### [59] "Freq_Of_Body_Accelerometer_Jerk_(weighted average)(Axis-Y)"    
+### [60] "Freq_Of_Body_Accelerometer_Jerk_(weighted average)(Axis-Z)"    
 ### [61] "Freq_Of_Body_Gyroscope_(mean)(Axis-X)"                         
 ### [62] "Freq_Of_Body_Gyroscope_(mean)(Axis-Y)"                         
 ### [63] "Freq_Of_Body_Gyroscope_(mean)(Axis-Z)"                         
 ### [64] "Freq_Of_Body_Gyroscope_(standard deviation)(Axis-X)"           
 ### [65] "Freq_Of_Body_Gyroscope_(standard deviation)(Axis-Y)"           
 ### [66] "Freq_Of_Body_Gyroscope_(standard deviation)(Axis-Z)"           
-### [67] "Freq_Of_Body_Gyroscope_(mean)(Axis-X)"                         
-### [68] "Freq_Of_Body_Gyroscope_(mean)(Axis-Y)"                         
-### [69] "Freq_Of_Body_Gyroscope_(mean)(Axis-Z)"                         
+### [67] "Freq_Of_Body_Gyroscope_(weighted average)(Axis-X)"             
+### [68] "Freq_Of_Body_Gyroscope_(weighted average)(Axis-Y)"             
+### [69] "Freq_Of_Body_Gyroscope_(weighted average)(Axis-Z)"             
 ### [70] "Freq_Of_Body_Accelerometer_Magnitude_(mean)"                   
 ### [71] "Freq_Of_Body_Accelerometer_Magnitude_(standard deviation)"     
-### [72] "Freq_Of_Body_Accelerometer_Magnitude_(mean)"                   
+### [72] "Freq_Of_Body_Accelerometer_Magnitude_(weighted average)"       
 ### [73] "Freq_Of_Body_Accelerometer_Jerk_Magnitude_(mean)"              
 ### [74] "Freq_Of_Body_Accelerometer_Jerk_Magnitude_(standard deviation)"
-### [75] "Freq_Of_Body_Accelerometer_Jerk_Magnitude_(mean)"              
+### [75] "Freq_Of_Body_Accelerometer_Jerk_Magnitude_(weighted average)"  
 ### [76] "Freq_Of_Body_Gyroscope_Magnitude_(mean)"                       
 ### [77] "Freq_Of_Body_Gyroscope_Magnitude_(standard deviation)"         
-### [78] "Freq_Of_Body_Gyroscope_Magnitude_(mean)"                       
+### [78] "Freq_Of_Body_Gyroscope_Magnitude_(weighted average)"           
 ### [79] "Freq_Of_Body_Gyroscope_Jerk_Magnitude_(mean)"                  
 ### [80] "Freq_Of_Body_Gyroscope_Jerk_Magnitude_(standard deviation)"    
-### [81] "Freq_Of_Body_Gyroscope_Jerk_Magnitude_(mean)"    
+### [81] "Freq_Of_Body_Gyroscope_Jerk_Magnitude_(weighted average)"    
 
 
 ######################################################################
