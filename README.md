@@ -89,6 +89,9 @@ Create R script called `run_analysis.R` that does the following.
 
 ------------------------------------------------------------------------------------------------
   
+   
+   
+------------------------------------------------------------------------------------------------   
 
 ##### Part #1 :: Merges the training and the test sets to create one data set.
 
@@ -102,14 +105,15 @@ Based on the information provided in `README.txt`
 Its range is from 1 to 30  
   
 Observed that the Training set cvs is a 'matrix' data - each row contain the detail of training set seperated by space.
- While the Training lables and subject cvs only have one columns of data.  
-* As such, first we will read-in the subject, training labels and training sets cvs for Training data set  
-* And, change the column name for easy merging   
- - The column name of subject data is changed to **_Subject_**  
- - The column name of training labels data is changed to **_ActivityID_**  
-* Next, merge them together using cbind() - column bind  
-* Then, repeat the same steps for Test data set  
-* Lastly, we merge the Training and Test data set together using rbind() - row bind  
+  
+While the Training lables and subject cvs only have one columns of data.  
+(a) As such, first we will read-in the subject, training labels and training sets cvs for Training data set  
+(b) And, change the column name for easy merging   
+* The column name of subject data is changed to **_Subject_**  
+* The column name of training labels data is changed to **_ActivityID_**  
+(c) Next, merge them together using cbind() - column bind  
+(d) Then, repeat the same steps for Test data set  
+(e) Lastly, we merge the Training and Test data set together using rbind() - row bind  
   
   
 **_Assumption_**  
@@ -117,22 +121,19 @@ For this study, only subject, training labels and training sets data is use
   
   
 **_Steps_**  
-1. Read Training Data (3 train files /3 steps)  
+[1] Read Training Data (3 train files /3 steps)  
  * Read training Subject data and set the colomn name as **_Subject_**  
  * Read training Labels (Activity) data and set the colomn name as **_ActivityID_**    
  * Read training Sets data  
-2. Merge all 3 training data to one data set (with cbind)
-3. Read Testing Data (3 test files /3 steps) 
+[2] Merge all 3 training data to one data set (with cbind)  
+[3] Read Testing Data (3 test files /3 steps) 
  * Read testing Subject data and set the colomn name as **_Subject_**  
  * Read testing Labels (Activity) data and set the colomn name as **_ActivityID_**    
  * Read testing Sets data  
-4. Merge all 3 testing data to one data set (with cbind)
-5. Merge **BOTH** training and testing data to one data set
-6. Quick check with head(), names(), dim(), str() to check the header and structure  
- **_Note_** There should be 10299 obs in the merge result  
-head(data, n=2)
-
-names(data)
+[4] Merge all 3 testing data to one data set (with cbind)  
+[5] Merge **BOTH** training and testing data to one data set   
+[6] Quick check with head(), names(), dim(), str() to check the header and structure  
+ **_Note_** There should be 10299 obs of 563 variables in the merge result  
 
 `dim(data)`    
 > [1] 10299   563  
@@ -149,6 +150,8 @@ names(data)
 > $ V6      : num  -0.914 -0.96 -0.979 -0.991 -0.99 ...  
 > [list output truncated]   
 
+  
+------------------------------------------------------------------------------------------------  
   
   
 
@@ -168,31 +171,31 @@ Where the *feature id* is the unique identifier of a feature type,
 while the *feature name* is the descriptive name of a feature type.  
   
 In other word, each data column with prefix 'V' is represent a type feature and identify using *feature id* specified in `features.txt`  
-* So, first we will read the feature.txt file and identify the *feature id* that presents mean and standard deviation  
-* After that, we subset the *feature id* for mean and standard deviation ONLY  
-* Because the feature column name have prefix 'V', we will add prefix 'V' in front of *feature id* (same format)  
-* Then, we create a character vector named *useColumn* that contains **_Subject_**, **_ActivityID_** and the prefixed 'V' *feature id*  
-* Next, we subset the data column with the created *useColumn*  
-* As such the data column name does not found in the *useColumn* is been ignored  
-* While the new subsetted data ONLY consists of data that related to mean and standard deviation ONLY  
+(a) So, first we will read the feature.txt file and identify the *feature id* that presents mean and standard deviation  
+(b) After that, we subset the *feature id* for mean and standard deviation ONLY  
+(c) Because the feature column name have prefix 'V', we will add prefix 'V' in front of *feature id* (same format)  
+(d) Then, we create a character vector named *useColumn* that contains **_Subject_**, **_ActivityID_** and the prefixed 'V' *feature id*  
+(e) Next, we subset the data column with the created *useColumn*  
+(f) As such the data column name does not found in the *useColumn* is been ignored  
+(g) While the new subsetted data ONLY consists of data that related to mean and standard deviation ONLY  
   
   
   
 **_Steps_**    
-1. Read the `features.txt` file  
+[1] Read the `features.txt` file  
 * This tells which variables in dataset are measurements for the mean and standard deviation    
-2. Check Data Feature Structures and Colomn Name  
-3. Set Colomn Name to "FeatureID" and "FeatureName" for easy navigate and understand  
-4. Subset only measurements for the mean and standard deviation  
+[2] Check Data Feature Structures and Colomn Name  
+[3] Set Colomn Name to "FeatureID" and "FeatureName" for easy navigate and understand  
+[4] Subset only measurements for the mean and standard deviation  
   * Based on the information provided in `features_info.txt`      
-  * mean is feature name that consists of word "mean"  like tBodyAcc-mean()-Y, tBodyAcc-mean()-Y
-  * standard deviation is feature name that consists of word "str"  such as tBodyAcc-std()-X, tBodyAcc-std()-Y  
+  - mean's feature name is consists of word "mean"  like tBodyAcc-mean()-Y, tBodyAcc-mean()-Y   
+  - standard deviation's feature name is consists of word "str" such as tBodyAcc-std()-X, tBodyAcc-std()-Y  
   * Subset with function grepl + regular expression on column "FeatureName"  
-  * **_Note_** There should be 79 obs in the subset result  
-5. Convert the column numbers to code with "V" prefix, this is preparation for "merge" into main data set  
-6. Merge the created feature code to feature (mean & std) data set
-7. Quick check with head(), Str() to ensure the column name and structure is correct  
-
+[5] Convert the column numbers to code with "V" prefix, this is preparation for "merge" into main data set  
+[6] Merge the created feature code to feature (mean & std) data set  
+[7] Quick check with head(), Str() to ensure the column name and structure is correct   
+  * **_Note_** There should be 79 obs of 3 variables in the subset result  
+  
 `str(subsetFeatures)`    
 > 'data.frame':    79 obs. of  3 variables:  
 > $ FeatureID: int  1 2 3 4 5 6 41 42 43 44 45 ...  
@@ -200,21 +203,10 @@ In other word, each data column with prefix 'V' is represent a type feature and 
 ..: 243 244 249 250 251 454 455 456 461 462 ...  
 > $ Code  : Factor w/ 79 levels "V1", "V121","V122",..: 13 33 43 59 72 44 45 52 53 54 ..  
   
-8. Create the Column to be Use (for subsetting in next step)
-9. Subset data with "mean" and "standard deviation" records only
-10. Check the subsetted data column name and structure  
-
-`names(subData)`  
-> [1] "Subject"  "ActivityID" "V2"       "V3"       "V4"       "V5"       "V6"       "V41"     
-> [9] "V42"      "V43"      "V44"      "V45"      "V46"      "V81"      "V82"      "V83"     
-> [17] "V84"      "V85"      "V86"      "V121"     "V122"     "V123"     "V124"     "V125"    
-> [25] "V126"     "V161"     "V162"     "V163"     "V164"     "V165"     "V166"     "V201"    
-> [33] "V202"     "V214"     "V215"     "V227"     "V228"     "V240"     "V241"     "V253"    
-> [41] "V254"     "V266"     "V267"     "V268"     "V269"     "V270"     "V271"     "V294"    
-> [49] "V295"     "V296"     "V345"     "V346"     "V347"     "V348"     "V349"     "V350"    
-> [57] "V373"     "V374"     "V375"     "V424"     "V425"     "V426"     "V427"     "V428"     
-> [65] "V429"     "V452"     "V453"     "V454"     "V503"     "V504"     "V513"     "V516"    
-> [73] "V517"     "V526"     "V529"     "V530"     "V539"     "V542"     "V543"     "V552"  
+[8] Create the Column to be Use (for subsetting in next step)  
+[9] Subset data with "mean" and "standard deviation" records only  
+[10] Check the subsetted data column name and structure   
+**_Note_** Some of the data column is removed because it is not related to "mean" and "standard deviation"  
   
 `str(subData)`  
 > 'data.frame':    10299 obs. of  81 variables:  
@@ -227,9 +219,10 @@ In other word, each data column with prefix 'V' is represent a type feature and 
 > [list output skipped here :)]  
 > $ V543    : num  -0.991 -0.996 -0.995 -0.995 -0.995 ...  
 > $ V552    : num  -0.0743 0.1581 0.4145 0.4046 0.0878 ...  
-
-**_Note_** Some of the data column is removed because it is not related to "mean" and "standard deviation"     
+       
   
+  
+------------------------------------------------------------------------------------------------
 
 
 ------------------------------------------------------------------------------------------------
@@ -240,28 +233,32 @@ In other word, each data column with prefix 'V' is represent a type feature and 
 Based on the information provided in `README.txt`  
 * `activity_labels.txt`: Links the class labels with their activity name     
   
-There are two column in `activity_labels.txt` - *activity id* and *activity name*. 
-Where the *activity id* is unique identifier of an activity type, 
-while the *activity name* is the descriptive name of an activity type.  
+There are two column in `activity_labels.txt` - **activity id** and **activity name**. 
+Where the **activity id** is unique identifier of an activity type, 
+while the **activity name** is the descriptive name of an activity type.  
     
-In other word, each row value in data "Activity" column is equal to the *activity id* listed in `activity_labels.txt`.
-As such, if we able to identify the *activity id* in data "Activity" column, we will able to find the respective the descriptive name of an activity type *activity name*.  
+In other word, each row value in data "Activity" column is equal to the **activity id** listed in `activity_labels.txt.  
+
+(a) As such, we will able to find the respective the descriptive name of an activity type **activity name**; when  we able to identify the **activity id** in data "Activity" column.    
+(b) So, here we will read the activity_labels.txt file and identify the **activity id** that each activity type (descriptive name) one by one and check their data structure  
   
-  
-* So, here we will read the activity_labels.txt file and identify the *activity id* that each activity type (descriptive name)   
   
 **_Steps_**  
-1. Read the `activity_labels.txt` file  
-- This tells which variables is the performed six activities (WALKING, WALKING_UPSTAIRS, WALKING_DOWNSTAIRS, SITTING, STANDING, LAYING) by each person (subject in data) 
-2. Set Colomn Name to "ActivityID" and "ActivityName" for easy navigate and understand  
-3. Quick check with head(), names(), Str() to ensure the column name and structure is correct   
+[1] Read the `activity_labels.txt` file  
+- This tells which variables is the performed six activities (WALKING, WALKING_UPSTAIRS, WALKING_DOWNSTAIRS, SITTING, STANDING, LAYING) by each person (subject in data)   
+[2] Set Colomn Name to "ActivityID" and "ActivityName" for easy navigate and understand  
+[3] Quick check with head(), names(), Str() to ensure the column name and structure is correct   
+[4] Loop the throught 'ActivityID' in subData, replace with 'ActivityName' if pattern matched  
+  * **_Note_** There should be 6 obs of 2 variables in the activity labels    
   
 `str(dataActivityLabels)`  
 > 'data.frame':    6 obs. of  2 variables:  
 > $ ActivityID  : int  1 2 3 4 5 6  
 > $ ActivityName: Factor w/ 6 levels "LAYING","SITTING",..: 4 6 5 2 3 1   
   
-4. Loop the throught 'ActivityID' in subData, replace with 'ActiviityName' if pattern matched  
+  
+  
+------------------------------------------------------------------------------------------------
   
   
   
@@ -270,36 +267,37 @@ As such, if we able to identify the *activity id* in data "Activity" column, we 
 
 ##### Part #4 :: Appropriately labels the data set with descriptive variable names.
 **_Abstract_**  
-Based on the information provided in `README.txt`  
+Based on the information provided in `feature_info.txt`  
 
 We have basic understand on the "Feature Labels", so we will try to search for their pattern using
 regular expression and replace with a more appropriate / meaningful name.  
   
-For example, "Feature Labels" begin with prefix **_t_** is the denote time and
-**_f_** indicate frequency domain signals. So, we will search for "Feature Labels"
-start with **_t_** using regular expression **^t** and replace as "Time_Of_" if matched, 
-likewise for **_f_** and others short name.  
+For example, "Feature Labels" begin with **_prefix_** **t** is the denote time and
+**_prefix_** **_f_** indicate frequency domain signals. 
 
-After, all the "Feature Labels" is refined, we add it to the data set column name 
-(overwrite the old one).  
+(a) So, we will search for "Feature Labels" start with **t** using regular expression **^t** and,   
+(b) Replace it as "Time_Of_" if matched. 
+(c) Likewise for **f** and others short name, we will search for "Feature Labels" start with **f** using regular expression **^f** and,   
+(d) Replace it as "Freq_Of_" if matched.  
+(e) Similiar steps is repeated for all other feature name matches and replaces,   
+(f) After, all the "Feature Labels" is refined, we add it to the data set column name (overwrite the old one).  
   
   
 **_Steps_**  
-1. Define the regular-expression and replace Feature Labels One by One  
-2. Extract the refined Feature Labels and replace existing Column Name  
-3. Quick check on the new redefined Column Name  
+[1] Define the regular-expression and replace Feature Labels One by One  
+[2] Extract the refined Feature Labels and replace existing Column Name  
+[3] Quick check on the new redefined Column Name  
 
-`names(subData)`
-> > names(subData)
- > [1] "Subject"                                                       
- > [2] "Activity_ID"                                                   
- > [3] "Time_Of_Body_Accelerometer_(mean)(Axis-X)"                     
- > [4] "Time_Of_Body_Accelerometer_(mean)(Axis-Y)"                     
- > [5] "Time_Of_Body_Accelerometer_(mean)(Axis-Z)"                     
- > [6] "Time_Of_Body_Accelerometer_(standard deviation)(Axis-X)"       
- > [7] "Time_Of_Body_Accelerometer_(standard deviation)(Axis-Y)"       
- > [8] "Time_Of_Body_Accelerometer_(standard deviation)(Axis-Z)"       
- > [9] "Time_Of_GravityAccelerometer_(mean)(Axis-X)"                   
+`names(subData)`  
+> [1] "Subject"                                                       
+> [2] "Activity_ID"                                                   
+> [3] "Time_Of_Body_Accelerometer_(mean)(Axis-X)"                     
+> [4] "Time_Of_Body_Accelerometer_(mean)(Axis-Y)"                     
+> [5] "Time_Of_Body_Accelerometer_(mean)(Axis-Z)"                     
+> [6] "Time_Of_Body_Accelerometer_(standard deviation)(Axis-X)"       
+> [7] "Time_Of_Body_Accelerometer_(standard deviation)(Axis-Y)"       
+> [8] "Time_Of_Body_Accelerometer_(standard deviation)(Axis-Z)"       
+> [9] "Time_Of_GravityAccelerometer_(mean)(Axis-X)"                   
 > [10] "Time_Of_GravityAccelerometer_(mean)(Axis-Y)"                   
 > [11] "Time_Of_GravityAccelerometer_(mean)(Axis-Z)"                   
 > [12] "Time_Of_GravityAccelerometer_(standard deviation)(Axis-X)"     
@@ -373,9 +371,15 @@ After, all the "Feature Labels" is refined, we add it to the data set column nam
 > [80] "Freq_Of_Body_Gyroscope_Jerk_Magnitude_(standard deviation)"    
 > [81] "Freq_Of_Body_Gyroscope_Jerk_Magnitude_(weighted average)"  
 
-
   
----
+  
+  
+------------------------------------------------------------------------------------------------
+  
+  
+  
+------------------------------------------------------------------------------------------------
+  
 
 ##### Part #5 :: From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject.
 **_Abstract_**  
@@ -385,16 +389,47 @@ Based on the information provided in `Discussion Forum`
   
   
 **_Steps_**   
-1. Create tidy data with mean of subject and activity  
-2. Refine Column Name  
-3. Quick check with names() if any mistake  
+[1] Create tidy data with mean of subject and activity  
+[2] Refine Column Name  
+[3] Quick check with names() if any mistake   
+[4] Create the mean data set to txt extension and no row names.  
+write.table(meanData, file = "run_analysis_v1.txt", row.names=FALSE)  
+[5] Lastly, we can goto the working directory to verify file the output file named `run_analysis_v1.txt`.  
+  * **_Note_** The suffix **_v1** is use for **version control**, if you happen to change the logic `run_analysis.R`. Simple change the outfile to next version like **_v2**.  
+  
 `names(meanData)[1:5]`  
 > [1] "Subject"                                   "Activity"                                 
 > [3] "Time_Of_Body_Accelerometer_(mean)(Axis-X)" "Time_Of_Body_Accelerometer_(mean)(Axis-Y)"  
 > [5] "Time_Of_Body_Accelerometer_(mean)(Axis-Z)"  
   
-4. Create the mean data set to txt extension and no row names.  
-write.table(meanData, file = "run_analysis_v1.txt", row.names=FALSE)  
-  
 
----
+  
+  
+------------------------------------------------------------------------------------------------
+  
+  
+------------------------------------------------------------------------------------------------
+  
+### Summary
+As conclusion, through this exercise we learns some basic idea and technic on `getting and cleanning data`. Let us quick recap the steps:  
+
+[1] Merged the 'training labels' and 'traning sets' data of subject from 2 group namely 'train' and 'test' in to single data set  
+[2] Filtered out ONLY the mean and standard deviation measurements out from data set result of step #1 by ONLY  
+[3] Updated the 'Activity' unique Id with a more descriptive 'Activity Name' 
+  - According to the info provided in 'activity_labels.txt'  
+  - WALKING, WALKING_UPSTAIRS, WALKING_DOWNSTAIRS, SITTING, STANDING, LAYING  
+[4] Refined the column name (V1:xx) with a more appropriate 'Feature Label' or feature selection  
+  - Based on the details provided in 'feature_info.text'  
+[5] Calculated the average of each variable for each activity and each subject, assigned to a new variables and output as txt file  
+  
+As you may already notice that, on top of the 5 steps above, there is still alot of 'cleaning' process 
+that we can do to further refine and tidy the data step.  Yes, but we will stop as it is for this exercise, and shall reopen/continue if required.  
+
+
+Lastly, I wanted to thank you very much for you patience and time to go through this study. 
+Thank you. Appreciate it.  
+  
+  
+###### By postalC  
+
+------------------------------------------------------------------------------------------------

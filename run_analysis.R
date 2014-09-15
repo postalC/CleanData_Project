@@ -71,10 +71,8 @@ trainSet <- read.table(file.path(pathIn, "train/X_train.txt"))
 ## -- Column Bind - all 3 column Training Data -- 
 trainData <- cbind.data.frame(trainSubject, trainActivity, trainSet)
 
-## -- Set un-use data frame to null --
-trainSubject <- NULL
-trainActivity <- NULL
-trainSet <- NULL
+## -- Remove un-use data frame --
+rm(trainSubject, trainActivity, trainSet)
 
 ################################################
 ## Read Test Data 
@@ -93,10 +91,8 @@ testSet <- read.table(file.path(pathIn, "test/X_test.txt"))
 ## -- Column Bind - all 3 column testing Data -- 
 testData <- cbind.data.frame(testSubject, testActivity, testSet)
 
-## -- Set un-use data frame to null --
-testSubject <- NULL
-testActivity <- NULL
-testSet <- NULL
+## -- Remove un-use data frame --
+rm(testSubject, testActivity, testSet)
 
 ################################################
 ## Merge Data 
