@@ -14,6 +14,8 @@ Below is some high-level info on what steps that the `run_analysis.R` performs.
 2. Extracts only the measurements on the mean and standard deviation for each measurement.  
 3. Uses descriptive activity names to name the activities in the data set.  
 4. Appropriately labels the data set with descriptive variable names.  
+  
+For more details, please refer to the `README.md`.  
 
 Both data sets list observations over 81 variables:  
 
